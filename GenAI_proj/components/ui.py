@@ -604,10 +604,16 @@ def prediction_rows(predictions: list[dict]) -> None:
     rows = []
     for item in predictions:
         pct = int(round(item["confidence"] * 100))
+        label = item.get("label")
+        category = item["category"]
+        if label and label != category:
+            display_name = f"{label} ({category})"
+        else:
+            display_name = category
         rows.append(
             f"""
             <div class="rl-predict-row">
-              <div class="rl-predict-head"><span>{_e(item["category"])}</span><strong>{pct}%</strong></div>
+              <div class="rl-predict-head"><span>{_e(display_name)}</span><strong>{pct}%</strong></div>
               <div class="rl-progress-track"><div class="rl-progress-fill" style="width:{pct}%"></div></div>
             </div>
             """

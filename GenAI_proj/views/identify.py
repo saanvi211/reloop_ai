@@ -167,9 +167,15 @@ def render() -> None:
                         icon_name="check",
                     )
                 else:
+                    detected = identification.get("detected_device")
+                    if detected and detected != identification["device"]:
+                        pred_title = f"Predicted: {detected} ({identification['device']})"
+                    else:
+                        pred_title = f"Predicted: {identification['device']}"
+
                     ui.banner(
-                        f"Predicted: {identification['device']}",
-                        f"Mock confidence {confidence}% · top {len(identification['predictions'])} matches shown below.",
+                        pred_title,
+                        f"Confidence {confidence}% · top {len(identification['predictions'])} matches shown below.",
                         tone="green" if confidence >= 60 else "amber",
                         icon_name="scan",
                     )
