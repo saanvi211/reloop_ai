@@ -1,0 +1,413 @@
+ReLoop AI: Giving Every Discarded Device a Second Life
+
+Capstone Project Proposal – Initial Submission for Approval
+
+
+
+1. Project Title
+
+ReLoop AI: From E-Waste to Second Life. An AI-Guided Decision System for the Repair, Reuse and Recycling of Electronic Devices
+
+2. Abstract
+
+Millions of tonnes of electronics are thrown away every year, and much of it is not really waste: a phone with a tired battery, a charger with a worn cable, earbuds that need a small fix. People discard these items out of uncertainty, not indifference. They cannot tell whether a device can be repaired, resold or must be recycled safely, and they do not know where to take it. ReLoop AI answers that question in minutes. A user photographs an unwanted device; a lightweight image classifier identifies it, a short condition check captures its age and state, and an explainable decision engine recommends the best pathway: repair, refurbish and resell, harvest for parts, or safe recycling, with strict safety rules for damaged batteries. The app then connects the user to verified repair shops and authorised collection points nearby. We hypothesise that this end-to-end guidance will choose the right pathway more often, and reach a suitable option faster, than image-only identification or manual search. Results will be reported using pathway accuracy, classification metrics, task time and an estimated environmental benefit.
+
+3. Introduction
+
+Background. The world generated an estimated 62 million tonnes of e-waste in 2022, and only about a fifth of it was documented as properly collected and recycled (Global E-waste Monitor 2024). India is among the largest contributors, and the E-Waste (Management) Rules, 2022 now make producers responsible for what happens to their products at end of life.
+
+Importance. Every discarded gadget is a mix of treasure and trouble. Copper, gold, cobalt and rare earths are worth recovering. Lead, mercury and flame retardants are dangerous when burned or dissolved in informal recycling. A damaged lithium-ion battery can start a fire in a bin or a collection truck. Meanwhile, plenty of devices that could have been repaired or reused are lost along the way.
+
+Motivation. Most people do not throw electronics away because they do not care; they do it because they do not know. Can this be fixed? Is it worth anything? Is it dangerous? Where do I take it? ReLoop AI exists to answer those four questions in one place. We chose this problem because it is real, relatable and measurable: it involves phones, chargers, batteries and appliances that every student owns, and it can be built and tested as a focused prototype.
+
+4. Problem Statement
+
+Someone holding an unwanted electronic item has no simple way to find out whether it can be repaired, refurbished, stripped for parts or must be recycled, or who will actually accept it. So items get binned, stockpiled in drawers or handed to informal collectors.
+
+This deserves a real solution because wrong disposal harms people and the environment, reusable value and materials are lost, repair and recycling information is scattered and hard to trust, and a tool that ends in a concrete next step changes behaviour in a way that awareness campaigns alone rarely do.
+
+5. Existing System
+
+Existing approach
+
+
+	What it does
+
+
+	Major limitations
+
+
+
+Manufacturer take-back and recycling programmes
+
+
+	Accept returned products at collection points or service centres
+
+
+	Brand-specific; little guidance on repair or reuse; users must already know the programme exists
+
+
+
+Government and authorised-recycler directories (e.g. CPCB lists in India)
+
+
+	List registered dismantlers and recyclers
+
+
+	Static lists; no item assessment; hard for non-experts to use; poor discovery of repair or resale options
+
+
+
+Repair guidance sites (e.g. iFixit)
+
+
+	Provide repairability information and guides
+
+
+	Assume user wants DIY repair; no link to local services or recycling
+
+
+
+Resale and trade-in platforms
+
+
+	Estimate resale value
+
+
+	Focus on value, not safety or recycling; limited to popular models
+
+
+
+Image-based waste classifiers (e.g. TrashNet-style projects)
+
+
+	Identify generic waste categories from photos
+
+
+	Stop at identification; no pathway decision, no local partners, ignore condition and battery safety
+
+
+
+General-purpose chatbots
+
+
+	Give generic advice
+
+
+	Not grounded in local rules or verified partners; can hallucinate; no structured evidence
+
+
+
+The gap: no widely available tool takes a user from "what is this?" to "here is what to do, and where" in a single flow.
+
+6. Proposed System
+
+ReLoop AI works like a friendly triage desk for old electronics: one photo, four steps, one clear answer.
+
+1.Identify. Snap a photo. A fine-tuned lightweight CNN predicts the item category (phone, charger, power bank, earbuds, laptop, small appliance) with a confidence score. If it is unsure, it asks for another photo instead of guessing.
+
+2.Assess. A short adaptive questionnaire captures age, brand or model (optional), working status, visible damage and battery condition such as swelling or overheating.
+
+3.Decide. A transparent rules-based engine scores each pathway (repair, refurbish and resell, harvest components, recycle, hazardous handling) and returns a ranked recommendation with reasons and any safety warning.
+
+4.Connect. The result is matched to a curated directory of verified repair shops, refurbishers and collection points, filtered by distance and accepted item types.
+
+How it addresses the limitations:
+
+From "what is it?" to "what now?" Identification is linked directly to an action, instead of stopping at a label.
+
+Condition-aware. Age, damage and battery state shape the advice, which image-only tools ignore.
+
+Explainable. Every recommendation comes with reasons, so it can be audited rather than trusted blindly.
+
+Honest about uncertainty. It asks for more input instead of guessing, and safety always comes first for damaged batteries.
+
+Local and verified. It relies on a verified, locally configurable directory rather than generic advice.
+
+7. Project Hypothesis
+
+For common consumer electronic items, ReLoop AI's combined image-plus-condition decision engine will recommend the expert-validated pathway more accurately than image-only classification mapped to a fixed category rule, and will let users reach an appropriate repair, reuse or recycling option faster than manual web search.
+
+Expected improvement and evaluation:
+
+Pathway accuracy is expected to exceed the image-only baseline by a clear margin (target: at least 15 percentage points).
+
+Median time to reach a suitable partner is expected to fall by at least 40% compared with manual search.
+
+Both will be tested on a held-out set of scenarios labelled by domain experts and in a small user task study (see Section 13). Targets are initial goals and will be refined after a pilot.
+
+8. Objectives
+
+1.Identify: fine-tune an image classifier for at least 8 consumer e-waste categories, reaching a macro-F1 of at least 0.85 on a held-out test set.
+
+2.Decide: build an explainable rules engine with five pathways that agrees with expert-labelled scenarios at least 80% of the time.
+
+3.Connect: curate a verified directory of at least 30 repair, refurbishment and collection partners in one pilot city.
+
+4.Deliver: ship a working, mobile-friendly prototype of the full identify, assess, decide and connect flow.
+
+5.Prove: evaluate against baselines with at least 15 participants, reporting pathway accuracy, time to decision and estimated environmental benefit.
+
+9. Proposed Methodology
+
+Step 1: Requirement study. Review the E-Waste (Management) Rules, collection-point and recycler lists, and repairability resources. Interview 10 to 15 potential users (students, households, hostel and campus staff) and 3 to 5 repair or recycling operators to define item categories, decision criteria and pain points.
+
+Step 2: Data collection and preparation. Assemble the image dataset and the partner directory (Section 10).
+
+Step 3: Image identification module. Fine-tune a pretrained MobileNetV2 (primary) and EfficientNet-B0 (comparison) using transfer learning, data augmentation (rotation, brightness, crop, blur) and class-weighted loss. Apply a confidence threshold; below it the system requests another photo or manual selection. Optional: Grad-CAM for interpretability.
+
+Step 4: Decision engine. Encode expert knowledge as weighted rules. Inputs: category, age, working status, damage, battery condition, brand support. Each pathway receives a score; the highest valid score is recommended, subject to hard safety overrides (for example, a swollen battery always routes to safe hazardous handling and is never offered for resale or DIY repair). The output includes reasons, an estimated residual value band and a repair feasibility rating based on category-level repairability heuristics.
+
+Step 5: Partner matching. Filter the directory by pathway, item type and distance (haversine), rank by distance and verification status.
+
+Step 6: Impact estimator. Convert the recommended pathway into an indicative saving (kg of e-waste diverted, approximate CO2e avoided) using published average emission factors, always shown as an estimate.
+
+Step 7: Integration and UI. Build the backend API and a responsive web interface with an optional camera input.
+
+Step 8: Testing and evaluation. Run the evaluation plan (Section 13), iterate and document.
+
+10. Dataset and Data Requirements
+
+Data
+
+
+	Source
+
+
+	Use
+
+
+
+Item images
+
+
+	Public datasets with electronics classes (e.g. TACO and other open waste-image datasets, filtered for e-waste), open image repositories under permissive licences, plus our own photographs of phones, chargers, batteries, earbuds, cables and small appliances in varied lighting and backgrounds
+
+
+	Train, validate and test the classifier
+
+
+
+Pathway scenarios
+
+
+	Expert-labelled cases created with repair technicians, recyclers and faculty
+
+
+	Decision-engine tuning and testing
+
+
+
+Partner directory
+
+
+	Authorised recycler and collection-point lists published by regulators, manufacturer take-back locations, and manually verified local repair shops
+
+
+	Partner matching
+
+
+
+Repairability and emission factors
+
+
+	Published repairability scores and lifecycle-assessment averages
+
+
+	Feasibility rating and impact estimate
+
+
+
+User-study data
+
+
+	Task logs and survey responses from volunteers
+
+
+	Evaluation
+
+
+
+11. System Architecture
+
+
+1. User Input
+- Web or phone camera.
+2. Frontend UI
+- Photo upload and questions.
+3. Backend API
+- FastAPI service.
+4. Image Identification
+- Fine-tuned CNN + confidence.
+- Identifies category and confidence level.
+5. Condition Questionnaire
+- Age, damage and battery state.
+- Collects condition inputs.
+6. Decision Engine
+- Rules score each pathway.
+- Hard safety overrides for batteries.
+- Determines the appropriate pathway based on image identification and condition inputs.
+7. Partner Directory
+- Verified local partners.
+8. Partner Matching
+- Filters by distance and item type.
+9. Impact Estimator
+- Estimates kilograms diverted and CO₂e impact.
+10. Final Result
+- Result shown to the user, including:
+- Pathway
+- Reasons
+- Safety note
+- Partners
+- Impact
+
+
+
+ReLoop AI system architecture - 10 components
+
+Interaction: the frontend sends the photo and answers to the API. The identification module returns a category with a confidence score. If confidence is low, the user is asked for more input. Category and condition inputs go to the decision engine, which returns a ranked pathway with reasons and any safety override. The pathway then drives partner matching and the impact estimate, and the combined result is displayed to the user.
+
+12. Tools and Technologies
+
+Languages: Python (model, backend), JavaScript/TypeScript (frontend).
+
+ML: PyTorch or TensorFlow/Keras, torchvision/timm, scikit-learn, OpenCV, Albumentations; Grad-CAM for explanations.
+
+Backend: FastAPI, SQLite or PostgreSQL (PostGIS optional), a rules module in plain Python.
+
+Frontend: React or a simple responsive HTML/JS app; browser camera API.
+
+Maps and location: OpenStreetMap and Leaflet (free); haversine distance.
+
+Deployment and tooling: Google Colab or Kaggle GPU for training; Git/GitHub; Docker (optional); Streamlit as a fallback for rapid demos.
+
+Hardware: a standard laptop, free-tier cloud GPU for training, and a smartphone for testing. No special sensors required.
+
+13. Evaluation Plan
+
+Metrics
+
+Classification: accuracy, precision, recall, macro-F1, confusion matrix, and calibration of confidence scores.
+
+Decision quality: pathway accuracy and agreement with expert labels (Cohen's kappa); safety-critical recall (percentage of hazardous cases correctly routed to safe handling, target close to 100%).
+
+User outcome: time to reach a suitable option, task success rate, and System Usability Scale (SUS) score.
+
+Impact: estimated kg diverted and CO2e avoided per recommended action (reported as estimates).
+
+Baselines for comparison
+
+1.Image-only baseline: the same classifier with a fixed category-to-pathway mapping (no condition inputs).
+
+2.Manual search baseline: users find an option using a web search and public directories.
+
+3.General-purpose chatbot baseline: a generic LLM given the same photo and description, scored against the same expert labels.
+
+Testing the hypothesis
+
+Build a held-out set of at least 100 expert-labelled scenarios. Compare pathway accuracy of ReLoop AI against baselines 1 and 3 (paired comparison, McNemar's test or bootstrap confidence intervals).
+
+Run a within-subject user study with at least 15 participants, each completing matched tasks with ReLoop AI and with manual search (order counterbalanced). Compare median task time (Wilcoxon signed-rank test) and success rate.
+
+The hypothesis is supported if ReLoop AI meets the targeted improvements with statistical evidence. If not, we will report the results and analyse error cases.
+
+14. Expected Outcomes
+
+Features and deliverables
+
+Trained, documented image classifier (8+ categories).
+
+Explainable decision engine with safety overrides and a published rule set.
+
+Verified partner directory for a pilot city with search and filtering.
+
+Working web prototype of the full flow, with a demo video.
+
+Evaluation report, code repository and the labelled scenario dataset.
+
+Anticipated benefits
+
+Users reach a clear next step in minutes instead of hours of searching.
+
+Fewer unsafe disposals, especially of damaged lithium batteries.
+
+More repairable and reusable items kept out of the waste stream.
+
+A measurable, replicable pilot that can grow to more categories and cities and plug into manufacturer take-back and repair services.
+
+
+
+16. Potential Challenges and Limitations
+
+Challenge
+
+
+	Mitigation
+
+
+
+Limited labelled e-waste images and class imbalance
+
+
+	Combine public data with our own photos; augmentation; class weighting; limit to 8 categories
+
+
+
+Visually similar items (e.g. chargers vs adapters) and poor photos
+
+
+	Confidence threshold; request extra photo or manual selection
+
+
+
+Repair feasibility varies by model and cannot be fully inferred from a photo
+
+
+	Use category-level heuristics plus user inputs; label output as an estimate, not a guarantee
+
+
+
+Safety risk from wrong advice on damaged batteries
+
+
+	Hard safety overrides; conservative defaults; clear warnings
+
+
+
+Partner data goes stale or is unverified
+
+
+	Manual verification, timestamps, user feedback to flag errors; limit to a pilot city
+
+
+
+Small user study limits statistical power
+
+
+	Report confidence intervals; treat results as pilot evidence
+
+
+
+Environmental impact estimates are approximate
+
+
+	Use published averages; show ranges; avoid overclaiming
+
+
+
+Privacy of photos and location
+
+
+	Minimal data, no retention by default, informed consent
+
+
+
+Compute limits
+
+
+	Lightweight models and free-tier GPUs
+
+
+
+Scope limits: the prototype covers selected categories and one city, does not offer data-wiping or logistics, and is a decision-support tool, not an official programme of any manufacturer or regulator.
+
